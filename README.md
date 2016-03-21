@@ -1,7 +1,7 @@
 Node.js module to interact with official [Telegram Bot API](https://core.telegram.org/bots/api). A bot token is needed, to obtain one, talk to [@botfather](https://telegram.me/BotFather) and create a new bot. Based on Yagop [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) project.
 
 ```sh
-npm install telegram-bot
+npm install burnLight/telegram-bot
 ```
 
 ```js
