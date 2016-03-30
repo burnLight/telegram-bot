@@ -70,7 +70,7 @@ TelegramBot
 * [TelegramBot](#TelegramBot)
     * [new TelegramBot(token, [options])](#new_TelegramBot_new)
     * [.requestRate](#TelegramBot+requestRate) ⇒ <code>Boolean</code>
-    * [.filter](#TelegramBot+filter) ⇒ <code>Boolean</code>
+    * [.setFilter(...filter)](#TelegramBot+setFilter) ⇒ <code>Boolean</code>
     * [.getMe()](#TelegramBot+getMe) ⇒ <code>Promise</code>
     * [.setWebHook(url, [cert])](#TelegramBot+setWebHook)
     * [.getUpdates([timeout], [limit], [offset])](#TelegramBot+getUpdates) ⇒ <code>Promise</code>
@@ -110,18 +110,18 @@ Set max number of request to telegram server per second
 | --- | --- | --- |
 | rate | <code>Number</code> | new request rate number |
 
-<a name="TelegramBot+filter"></a>
+<a name="TelegramBot+setFilter"></a>
 
-### telegramBot.filter ⇒ <code>Boolean</code>
-Set message function to filter receiving updates
+### telegramBot.setFilter(...filter) ⇒ <code>Boolean</code>
+Set message functions to filter receiving updates
 
-**Kind**: instance property of <code>[TelegramBot](#TelegramBot)</code>  
+**Kind**: instance method of <code>[TelegramBot](#TelegramBot)</code>  
 **Returns**: <code>Boolean</code> - false in case of wrong param, true if no errors occur  
 **See**: https://core.telegram.org/bots/api#update  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| filter | <code>function</code> | function to be used to filter message                             passing to it the update obj received |
+| ...filter | <code>function</code> | function to be used to filter message                             passing to it the update obj received |
 
 <a name="TelegramBot+getMe"></a>
 

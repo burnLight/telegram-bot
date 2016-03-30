@@ -142,18 +142,17 @@ class TelegramBot extends EventEmitter {
     }
 
     /**
-     * Set message function to filter receiving updates
-     * @param   {Function}  filter  function to be used to filter message
+     * Set message functions to filter receiving updates
+     * @param   {...Function}  filter  function to be used to filter message
                             passing to it the update obj received
      * @return  {Boolean}   false in case of wrong param, true if no errors occur
      * @see     https://core.telegram.org/bots/api#update
      */
-    set filter(filter){
-        if(filter && typeof filter === 'function'){
-            this._filter = filter;
-            return true;
-        }
-        else return false;
+    setFilter(filter){
+        for(let i = 0; i < arguments.length; i++)
+            if(!arguments[i] && typeof arguments[i] !== 'function')
+                return false;
+        this._filter = arguments;
     }
 
     /**
@@ -163,7 +162,12 @@ class TelegramBot extends EventEmitter {
      */
     _processUpdate(update) {
         debug('Filtering');
-        if(this._filter && !this._filter(update)) return;
+        if(this._filter && !((update) => {
+            for(let i = 0; i < this._filter.length; i++)
+                if(!this._filter[i](update))
+                    return false;
+            return true;
+        })(update)) return false;
 
         debug('Process Update %j', update);
         var message = update.message;

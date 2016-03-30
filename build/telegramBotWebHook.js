@@ -22,7 +22,6 @@ var TelegramBotWebHook = function () {
         var binded = this._requestListener.bind(this);
 
         if (options.key && options.cert) {
-            // HTTPS Server
             debug('HTTPS WebHook enabled');
             var opts = {
                 key: fs.readFileSync(options.key),
@@ -47,7 +46,7 @@ var TelegramBotWebHook = function () {
 
             debug('WebHook request URL:', req.url);
             debug('WebHook request headers: %j', req.headers);
-            // If there isn't token on URL
+
             if (!regex.test(req.url)) {
                 debug('WebHook request unauthorized');
                 res.statusCode = 401;
@@ -68,9 +67,8 @@ var TelegramBotWebHook = function () {
                     res.end('OK');
                 });
             } else {
-                // Authorized but not a POST
                 debug('WebHook request isn\'t a POST');
-                res.statusCode = 418; // I'm a teabot!
+                res.statusCode = 418;
                 res.end();
             }
         }
